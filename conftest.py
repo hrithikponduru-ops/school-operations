@@ -1,0 +1,1 @@
+# Makes the stage packages importable when running `pytest` from the repo root.

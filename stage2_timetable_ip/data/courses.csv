@@ -1,0 +1,14 @@
+course_id,name,band,teacher
+ALG2,Algebra II,math,Ms. Chen
+PRECALC,Precalculus,math,Mr. Ortiz
+CALC,AP Calculus,math,Dr. Lee
+BIO,Biology,science,Dr. Patel
+CHEM,Chemistry,science,Ms. Wong
+PHYS,Physics,science,Dr. Lee
+ENG11,English 11,english,Ms. Rivera
+APLIT,AP Literature,english,Mr. Adams
+USHIST,US History,history,Mr. Kim
+GOV,Government,history,Ms. Rivera
+ART,Studio Art,elective,Ms. Novak
+CS,Computer Science,elective,Mr. Ortiz
+MUSIC,Music Theory,elective,Ms. Novak

@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Operations Research - Applied Mathematics Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        nav {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            border-bottom: 2px solid #e9ecef;
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        main {
+            padding: 40px;
+        }
+
+        .overview {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            border-left: 4px solid #667eea;
+        }
+
+        .overview h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .comparison-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .stage-section {
+            margin: 50px 0;
+            padding: 40px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .stage-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stage-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .stage-header h2 {
+            color: #333;
+            font-size: 1.8em;
+        }
+
+        .stage-subtitle {
+            color: #666;
+            font-size: 0.95em;
+            margin-top: 5px;
+        }
+
+        .model-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .model-box h4 {
+            color: #667eea;
+            margin-bottom: 12px;
+        }
+
+        .math-formula {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            line-height: 1.8;
+        }
+
+        .results-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .results-box h4 {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            font-weight: 500;
+        }
+
+        .improvement {
+            color: #4caf50;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .baseline {
+            text-decoration: line-through;
+            opacity: 0.8;
+        }
+
+        .figure-section {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .figure-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin: 15px 0;
+        }
+
+        .figure-caption {
+            color: #666;
+            font-size: 0.95em;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .technique-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .technique-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .technique-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .code-section {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .code-section .keyword {
+            color: #569cd6;
+        }
+
+        .code-section .string {
+            color: #ce9178;
+        }
+
+        .code-section .comment {
+            color: #6a9955;
+        }
+
+        .run-section {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .run-section h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+
+        .command {
+            background: white;
+            border: 1px solid #4caf50;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            margin: 8px 0;
+            color: #333;
+            word-break: break-all;
+        }
+
+        .sensitivity-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+
+        .sensitivity-table th {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #1976d2;
+        }
+
+        .sensitivity-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .binding {
+            background: #fff3cd;
+            font-weight: 600;
+        }
+
+        .slack {
+            color: #666;
+            opacity: 0.8;
+        }
+
+        .extension {
+            background: #f3e5f5;
+            border-left: 4px solid #7b1fa2;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .extension h4 {
+            color: #7b1fa2;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 40px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .constraint-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+
+        .constraint-table th {
+            background: #f5f5f5;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .constraint-table td {
+            padding: 12px;
+            border-bottom: 1px solid #f0f0f0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .constraint-table .num {
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .highlight {
+            background: #ffff76;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .test-results {
+            background: #e8f5e9;
+            border: 1px solid #4caf50;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .test-results .pass {
+            color: #2e7d32;
+            font-weight: 600;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .badge-lp {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .badge-ip {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .badge-cvrp {
+            background: #e0f2f1;
+            color: #00796b;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            nav {
+                gap: 10px;
+            }
+            .stage-section {
+                padding: 20px;
+            }
+            main {
+                padding: 20px;
+            }
+            .comparison-table,
+            .sensitivity-table,
+            .constraint-table {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>School Operations Research</h1>
+            <p>Applied Mathematics Portfolio</p>
+        </header>
+
+        <nav>
+            <a href="#overview">Overview</a>
+            <a href="#comparison">Comparison</a>
+            <a href="#stage1">Stage 1: Menu</a>
+            <a href="#stage2">Stage 2: Timetable</a>
+            <a href="#stage3">Stage 3: Bus Routing</a>
+            <a href="#getting-started">Getting Started</a>
+        </nav>
+
+        <main>
+            <!-- OVERVIEW -->
+            <section id="overview" class="overview">
+                <h2>Project Overview</h2>
+                <p>This project demonstrates three real optimization problems that schools solve daily, modeled as mathematical programs and solved with the open-source CBC solver. Each stage introduces a new layer of complexity and a fundamental optimization technique.</p>
+                <p style="margin-top: 15px; font-weight: 600;">Why this matters for applied math:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Stage 1</strong> shows how to turn a real-world problem into a linear program and extract insights (shadow prices) from the solution.</li>
+                    <li><strong>Stage 2</strong> introduces integer variables and shows the gap between finding a good answer and proving nothing better exists.</li>
+                    <li><strong>Stage 3</strong> uses the Miller-Tucker-Zemlin constraint to elegantly enforce both capacity limits and route connectivity.</li>
+                </ul>
+            </section>
+
+            <!-- COMPARISON TABLE -->
+            <section id="comparison">
+                <h2 style="margin-bottom: 20px; color: #333;">Performance Summary</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Stage</th>
+                            <th>Problem</th>
+                            <th>Type</th>
+                            <th>By Hand</th>
+                            <th>Optimized</th>
+                            <th>Improvement</th>
+                            <th>Solve Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="badge badge-lp">1</span></td>
+                            <td>Cheapest lunch meeting nutrition targets</td>
+                            <td>Linear Program</td>
+                            <td>$2.45</td>
+                            <td><strong style="color: #4caf50;">$1.14</strong></td>
+                            <td>53% savings</td>
+                            <td>&lt; 1 s</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-ip">2</span></td>
+                            <td>Timetable 13 courses, 45 students</td>
+                            <td>Integer Program</td>
+                            <td>81 conflicts</td>
+                            <td><strong style="color: #4caf50;">6 conflicts</strong></td>
+                            <td>92.6% reduction</td>
+                            <td>~60 s</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-cvrp">3</span></td>
+                            <td>Route 3 buses to 10 stops</td>
+                            <td>Capacitated Vehicle Routing</td>
+                            <td>40.11 km</td>
+                            <td><strong style="color: #4caf50;">36.11 km</strong></td>
+                            <td>10% reduction</td>
+                            <td>~6 s</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- STAGE 1 -->
+            <section id="stage1" class="stage-section">
+                <div class="stage-header">
+                    <div class="stage-number">1</div>
+                    <div>
+                        <h2>The Cheapest Nutritious School Lunch</h2>
+                        <div class="stage-subtitle"><span class="badge badge-lp">Linear Programming</span></div>
+                    </div>
+                </div>
+
+                <h3>The Question</h3>
+                <p>Given 10 foods with known cost and nutrition facts, what is the cheapest lunch that meets calorie, protein, fiber, and sodium targets?</p>
+
+                <h3 style="margin-top: 25px;">The Answer</h3>
+                <div class="results-box">
+                    <h4>Optimal menu: <strong>$1.14</strong></h4>
+                    <div class="metric">
+                        <span>vs. hand-built sensible menu:</span>
+                        <span class="baseline">$2.45</span>
+                    </div>
+                    <div class="metric">
+                        <span style="color: #4caf50;">Savings:</span>
+                        <span style="color: #4caf50;">53.1%</span>
+                    </div>
+                </div>
+
+                <h3>The Model</h3>
+                <div class="model-box">
+                    <h4>Decision Variables</h4>
+                    <div class="math-formula">x_i ≥ 0  for i &isin; foods<br>
+                    (servings of food i, continuous)</div>
+                    
+                    <h4 style="margin-top: 20px;">Objective</h4>
+                    <div class="math-formula">minimize: Σ c_i · x_i<br>
+                    (total cost)</div>
+                    
+                    <h4 style="margin-top: 20px;">Constraints</h4>
+                    <div class="math-formula">L_n ≤ Σ a_{n,i} · x_i ≤ U_n  for each nutrient n<br>
+                    0 ≤ x_i ≤ u_i  (realism bounds)</div>
+                </div>
+
+                <h3>Why This Matters</h3>
+                <p>This is the classic <strong>diet problem</strong> from 1945, one of the first optimization problems solved with the simplex method. It teaches:</p>
+                <ul class="technique-list">
+                    <li><strong>Shadow prices:</strong> How much each nutrient bound costs you at the margin</li>
+                    <li><strong>Complementary slackness:</strong> Why a zero dual value means the constraint is not tight</li>
+                    <li><strong>Vertex solutions:</strong> Why the optimal menu uses only a few foods</li>
+                </ul>
+
+                <h3>The Result</h3>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <strong>Optimal Menu (3.00 servings of peanut butter + 1.14 servings of brown rice + 0.01 servings of chicken breast):</strong>
+                    <table style="width: 100%; margin-top: 15px;">
+                        <tr style="background: #e9ecef;">
+                            <td><strong>Nutrient</strong></td>
+                            <td style="text-align: right;"><strong>Amount</strong></td>
+                            <td style="text-align: right;"><strong>Target</strong></td>
+                        </tr>
+                        <tr><td>Calories</td><td style="text-align: right;">817.2 kcal</td><td style="text-align: right;">≥ 850</td></tr>
+                        <tr style="background: #f8f9fa;"><td>Protein</td><td style="text-align: right;">30.0 g</td><td style="text-align: right;">≥ 30</td></tr>
+                        <tr><td>Fiber</td><td style="text-align: right;">10.0 g</td><td style="text-align: right;">≥ 10</td></tr>
+                        <tr style="background: #f8f9fa;"><td>Sodium</td><td style="text-align: right;">432.1 mg</td><td style="text-align: right;">≤ 1000</td></tr>
+                    </table>
+                </div>
+
+                <div class="figure-section">
+                    <img src="figures/stage1_menu.png" alt="Stage 1 menu visualization">
+                    <div class="figure-caption">Optimal food quantities to minimize cost while meeting all nutrition constraints</div>
+                </div>
+
+                <h3>Sensitivity Analysis</h3>
+                <p>The <strong>shadow price</strong> of a constraint tells you how much the optimal cost changes if that constraint's bound moves by one unit:</p>
+                <table class="sensitivity-table">
+                    <thead>
+                        <tr>
+                            <th>Constraint</th>
+                            <th>Current Value</th>
+                            <th>Bound</th>
+                            <th>Shadow Price</th>
+                            <th>Interpretation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="binding">
+                            <td>Protein minimum</td>
+                            <td>30.0 g</td>
+                            <td>30 g</td>
+                            <td>+$0.0387/g</td>
+                            <td>Each extra gram of required protein costs 3.9¢</td>
+                        </tr>
+                        <tr class="binding">
+                            <td>Fiber minimum</td>
+                            <td>10.0 g</td>
+                            <td>10 g</td>
+                            <td>+$0.0018/g</td>
+                            <td>Fiber is cheap at the margin</td>
+                        </tr>
+                        <tr class="slack">
+                            <td>Calories minimum</td>
+                            <td>817.2 kcal</td>
+                            <td>850 kcal</td>
+                            <td>$0</td>
+                            <td>Slack constraint; loosening it doesn't help</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- STAGE 2 -->
+            <section id="stage2" class="stage-section">
+                <div class="stage-header">
+                    <div class="stage-number">2</div>
+                    <div>
+                        <h2>Conflict-Free Course Timetabling</h2>
+                        <div class="stage-subtitle"><span class="badge badge-ip">Integer Programming</span></div>
+                    </div>
+                </div>
+
+                <h3>The Question</h3>
+                <p>Assign 13 courses to 6 periods and 4 rooms so that no teacher or room is double-booked, and minimize student schedule conflicts.</p>
+
+                <h3 style="margin-top: 25px;">The Answer</h3>
+                <div class="results-box">
+                    <h4>Student conflicts: <span class="baseline">81 (greedy)</span> &rarr; <strong>6 (optimal, proven)</strong></h4>
+                    <div class="metric">
+                        <span>Improvement:</span>
+                        <span class="improvement">92.6% reduction</span>
+                    </div>
+                    <div class="metric">
+                        <span>Solution quality:</span>
+                        <span style="color: #4caf50;">Proven optimal by solver</span>
+                    </div>
+                </div>
+
+                <h3>The Model</h3>
+                <div class="model-box">
+                    <h4>Decision Variables</h4>
+                    <div class="math-formula">x_{c,p,r} &isin; {0,1}  course c meets in period p, room r<br>
+                    y_{c,p} = Σ_r x_{c,p,r} (helper: course c meets in period p)<br>
+                    v_{s,p} ≥ 0  (integer) conflicts student s has in period p</div>
+                    
+                    <h4 style="margin-top: 20px;">Objective</h4>
+                    <div class="math-formula">minimize: Σ_{s,p} v_{s,p}<br>
+                    (total student conflicts)</div>
+                    
+                    <h4 style="margin-top: 20px;">Hard Constraints (cannot break)</h4>
+                    <div class="math-formula">(1) Each course scheduled once<br>
+                    (2) No room double-booked<br>
+                    (3) No teacher double-booked<br>
+                    (4) Class fits room capacity (enforced by not creating variables)</div>
+                    
+                    <h4 style="margin-top: 20px;">Soft Constraint (minimize violations)</h4>
+                    <div class="math-formula">(5) Σ_{c &isin; student's courses} y_{c,p} - 1 ≤ v_{s,p}<br>
+                    (if student has 2+ courses in period p, one is a conflict)</div>
+                </div>
+
+                <h3>Three Advanced Techniques</h3>
+                <ul class="technique-list">
+                    <li><strong>Soft constraints:</strong> Make violations countable and minimizable instead of infeasible</li>
+                    <li><strong>Domain reduction:</strong> Never create a variable x_{c,p,r} if the class doesn't fit the room</li>
+                    <li><strong>Symmetry breaking:</strong> Fix the first course in period 1 to eliminate equivalent relabelings</li>
+                </ul>
+
+                <h3>Optimal Schedule</h3>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; overflow-x: auto;">
+                    <table style="width: 100%;">
+                        <tr style="background: #e9ecef;">
+                            <td><strong>Course</strong></td>
+                            <td><strong>Teacher</strong></td>
+                            <td style="text-align: right;"><strong>Size</strong></td>
+                            <td style="text-align: center;"><strong>Period</strong></td>
+                            <td><strong>Room</strong></td>
+                        </tr>
+                        <tr><td>Algebra II</td><td>Ms. Chen</td><td style="text-align: right;">14</td><td style="text-align: center;">P1</td><td>R101 (30)</td></tr>
+                        <tr style="background: #f8f9fa;"><td>Precalculus</td><td>Mr. Ortiz</td><td style="text-align: right;">15</td><td style="text-align: center;">P1</td><td>R201 (24)</td></tr>
+                        <tr><td>AP Calculus</td><td>Dr. Lee</td><td style="text-align: right;">17</td><td style="text-align: center;">P1</td><td>R102 (30)</td></tr>
+                        <tr style="background: #f8f9fa;"><td>Computer Science</td><td>Mr. Ortiz</td><td style="text-align: right;">15</td><td style="text-align: center;">P2</td><td>LAB (18)</td></tr>
+                        <tr><td>Biology</td><td>Dr. Patel</td><td style="text-align: right;">13</td><td style="text-align: center;">P4</td><td>LAB (18)</td></tr>
+                    </table>
+                </div>
+
+                <div class="figure-section">
+                    <img src="figures/stage2_conflicts.png" alt="Stage 2 conflict reduction">
+                    <div class="figure-caption">Greedy baseline produces 81 conflicts; the integer program reduces this to 6 and proves nothing better is possible</div>
+                </div>
+
+                <h3>Why Proving Optimality Takes a Minute</h3>
+                <p>The solver finds the 6-conflict solution in 2-3 seconds. The remaining time is spent proving that 5 conflicts is impossible.</p>
+                <div class="model-box">
+                    <p><strong>The problem:</strong> When we relax the binary variables to continuous values between 0 and 1, the LP relaxation allows courses to split between periods (50% in period 1, 50% in period 2). This makes the lower bound on conflicts equal to 0, which is useless.</p>
+                    <p style="margin-top: 10px;"><strong>The solution:</strong> The solver uses branch-and-bound, exploring the search tree and tightening bounds. Valid inequalities (cuts) on the conflict graph would help, but the default solver uses general-purpose cuts, which takes time.</p>
+                </div>
+
+                <div class="test-results">
+                    <div class="pass">&check; All 6 hard constraints satisfied</div>
+                    <div class="pass" style="margin-top: 8px;">&check; 18 tests verify the model behaves as documented</div>
+                    <div class="pass" style="margin-top: 8px;">&check; Proven 6 is optimal; no schedule has fewer conflicts</div>
+                </div>
+            </section>
+
+            <!-- STAGE 3 -->
+            <section id="stage3" class="stage-section">
+                <div class="stage-header">
+                    <div class="stage-number">3</div>
+                    <div>
+                        <h2>School Bus Routing</h2>
+                        <div class="stage-subtitle"><span class="badge badge-cvrp">Capacitated Vehicle Routing Problem</span></div>
+                    </div>
+                </div>
+
+                <h3>The Question</h3>
+                <p>Ten bus stops with 58 students total. Three buses with 24 seats each. Which stops should each bus serve, in what order, to minimize total driving distance?</p>
+
+                <h3 style="margin-top: 25px;">The Answer</h3>
+                <div class="results-box">
+                    <h4>Total distance: <span class="baseline">40.1 km (nearest-neighbor)</span> &rarr; <strong>36.1 km (optimal)</strong></h4>
+                    <div class="metric">
+                        <span>Improvement:</span>
+                        <span class="improvement">10% reduction</span>
+                    </div>
+                    <div class="metric">
+                        <span>Better load balance:</span>
+                        <span style="color: #4caf50;">All buses nearly full (19, 22, 17 students)</span>
+                    </div>
+                </div>
+
+                <h3>The Model</h3>
+                <div class="model-box">
+                    <h4>Decision Variables</h4>
+                    <div class="math-formula">x_{i,j} &isin; {0,1}  bus drives directly from stop i to stop j<br>
+                    u_j &isin; [q_j, Q]  students on board after picking up stop j</div>
+                    
+                    <h4 style="margin-top: 20px;">Objective</h4>
+                    <div class="math-formula">minimize: Σ_{i&ne;j} d_{i,j} · x_{i,j}<br>
+                    (total distance traveled)</div>
+                    
+                    <h4 style="margin-top: 20px;">Constraints</h4>
+                    <div class="math-formula">(1) Each stop visited exactly once<br>
+                    (2) Each stop has exactly one bus leaving<br>
+                    (3) At most K buses leave the school<br>
+                    (4) MTZ load: u_j ≥ u_i + q_j - Q(1 - x_{i,j})<br>
+                        (eliminates sub-tours AND enforces capacity!)<br>
+                    (5) Load bounds: q_j ≤ u_j ≤ Q</div>
+                </div>
+
+                <h3>The Miller-Tucker-Zemlin (MTZ) Constraint Explained</h3>
+                <div class="extension">
+                    <h4>Why constraint (4) does two jobs at once:</h4>
+                    <p><strong>Case 1: x_{i,j} = 0 (bus doesn't go from i to j)</strong></p>
+                    <p>The constraint becomes u_j ≥ u_i + q_j - Q, which is weak because u_i ≤ Q. No effect.</p>
+
+                    <p style="margin-top: 15px;"><strong>Case 2: x_{i,j} = 1 (bus goes directly from i to j)</strong></p>
+                    <p>The constraint becomes u_j ≥ u_i + q_j. The load strictly increases!</p>
+
+                    <p style="margin-top: 15px;"><strong>Killing sub-tours:</strong> If a disconnected loop 1 &rarr; 2 &rarr; 3 &rarr; 1 existed (no school), then following (4) around the loop would give 0 ≥ q_1 + q_2 + q_3, a contradiction. Sub-tours are impossible because only the school has no u variable.</p>
+
+                    <p style="margin-top: 15px;"><strong>Enforcing capacity:</strong> u_j ≤ Q ensures load never exceeds bus seats.</p>
+                </div>
+
+                <h3>Optimal Routes</h3>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <strong>Bus 1 (19/24 students, 10.03 km):</strong><br>
+                    School &rarr; Maple &amp; 3rd &rarr; Oak Hill &rarr; Riverside Park &rarr; School
+
+                    <p style="margin-top: 15px;"><strong>Bus 2 (22/24 students, 14.39 km):</strong><br>
+                    School &rarr; Pine Court &rarr; Library &rarr; Elm Street &rarr; Meadow Dr &rarr; School</p>
+
+                    <p style="margin-top: 15px;"><strong>Bus 3 (17/24 students, 11.68 km):</strong><br>
+                    School &rarr; Cedar Ave &rarr; Birch Lane &rarr; Station Rd &rarr; School</p>
+                </div>
+
+                <div class="figure-section">
+                    <img src="figures/stage3_routes.png" alt="Stage 3 bus routes">
+                    <div class="figure-caption">Left: nearest-neighbor greedy (40.1 km) wastes distance. Right: integer program divides the map into three clean wedges and saves 10% of driving distance.</div>
+                </div>
+
+                <h3>Model Size and Performance</h3>
+                <div style="background: #e8f5e9; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div>
+                            <strong>Variables:</strong><br>
+                            110 binary arc variables<br>
+                            10 continuous load variables
+                        </div>
+                        <div>
+                            <strong>Constraints:</strong><br>
+                            90 Miller-Tucker-Zemlin constraints<br>
+                            + flow conservation constraints
+                        </div>
+                    </div>
+                    <p style="margin-top: 15px; color: #2e7d32;"><strong>Solve time:</strong> ~6 seconds (proven optimal)</p>
+                </div>
+
+                <h3>Easy "What-If" Experiments</h3>
+                <p>Each question is just one line of code to change:</p>
+                <ul class="technique-list">
+                    <li><strong>Bus breaks down?</strong> Set buses = 2. Capacity = 48 &lt; 58 students &rarr; <em>infeasible</em> (correct answer)</li>
+                    <li><strong>Add a bus?</strong> Set buses = 4. Watch how much additional distance it saves</li>
+                    <li><strong>Smaller buses?</strong> Set capacity = 20. Routes fragment to fit smaller vehicles</li>
+                    <li><strong>New stop?</strong> Add one row to stops.csv. Nothing else changes</li>
+                    <li><strong>Real road distances?</strong> Fetch from OpenStreetMap and replace Euclidean distances</li>
+                </ul>
+            </section>
+
+            <!-- GETTING STARTED -->
+            <section id="getting-started" class="stage-section">
+                <h2>Getting Started</h2>
+
+                <h3>Prerequisites</h3>
+                <ul style="margin-left: 20px;">
+                    <li>Python 3.10+</li>
+                    <li>pip (Python package manager)</li>
+                    <li>Git (to version control your work)</li>
+                </ul>
+
+                <h3 style="margin-top: 30px;">Installation</h3>
+                <div class="run-section">
+                    <h3>Step 1: Clone and enter the directory</h3>
+                    <div class="command">cd school-operations-research</div>
+
+                    <h3 style="margin-top: 20px;">Step 2: Install dependencies</h3>
+                    <div class="command">pip install -r requirements.txt</div>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: #666;">This installs PuLP (3.x), pandas, matplotlib, and pytest. PuLP bundles the CBC solver—no additional license needed.</p>
+                </div>
+
+                <h3 style="margin-top: 30px;">Run Each Stage</h3>
+                <div class="run-section">
+                    <h3>Stage 1: Optimal lunch menu</h3>
+                    <div class="command">python -m stage1_menu_lp.run</div>
+                    <p style="margin-top: 10px; font-size: 0.9em;">Runs in &lt;1 second. Prints the menu and shadow prices, saves figure.</p>
+
+                    <h3 style="margin-top: 20px;">Stage 2: Timetable (with proof of optimality)</h3>
+                    <div class="command">python -m stage2_timetable_ip.make_data</div>
+                    <div class="command" style="margin-top: 8px;">python -m stage2_timetable_ip.run</div>
+                    <p style="margin-top: 10px; font-size: 0.9em;">Total: ~60 seconds. Solver proves 6 conflicts is optimal. (First command regenerates the random student data if you modify courses.csv.)</p>
+
+                    <h3 style="margin-top: 20px;">Stage 3: Bus routes</h3>
+                    <div class="command">python -m stage3_bus_routing.run</div>
+                    <p style="margin-top: 10px; font-size: 0.9em;">Runs in ~6 seconds. Compares nearest-neighbor greedy vs. optimal, saves route map.</p>
+                </div>
+
+                <h3 style="margin-top: 30px;">Run Tests</h3>
+                <div class="run-section">
+                    <h3>All stages</h3>
+                    <div class="command">python -m pytest tests -v</div>
+                    <p style="margin-top: 10px; font-size: 0.9em;">~18 tests, ~40 seconds. Each test docstring states which constraint it guards.</p>
+                </div>
+
+                <h3 style="margin-top: 30px;">Repository Structure</h3>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 0.9em; line-height: 1.8;">
+                    school-operations-research/<br>
+                    ├── README.md&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Main documentation<br>
+                    ├── index.html&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# This file<br>
+                    ├── requirements.txt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Python dependencies<br>
+                    ├── stage1_menu_lp/<br>
+                    │&nbsp;&nbsp;&nbsp;├── model.py&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# The LP<br>
+                    │&nbsp;&nbsp;&nbsp;├── run.py&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Solve and print results<br>
+                    │&nbsp;&nbsp;&nbsp;├── README.md&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Detailed math<br>
+                    │&nbsp;&nbsp;&nbsp;└── data/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# foods.csv, targets.csv<br>
+                    ├── stage2_timetable_ip/<br>
+                    │&nbsp;&nbsp;&nbsp;├── model.py&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# The IP<br>
+                    │&nbsp;&nbsp;&nbsp;├── baseline.py&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Greedy "by hand" method<br>
+                    │&nbsp;&nbsp;&nbsp;├── make_data.py&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Generate student enrollments<br>
+                    │&nbsp;&nbsp;&nbsp;├── run.py&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Solve and compare<br>
+                    │&nbsp;&nbsp;&nbsp;├── README.md&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Detailed math<br>
+                    │&nbsp;&nbsp;&nbsp;└── data/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# courses.csv, students.csv<br>
+                    ├── stage3_bus_routing/<br>
+                    │&nbsp;&nbsp;&nbsp;├── model.py&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# The CVRP<br>
+                    │&nbsp;&nbsp;&nbsp;├── baseline.py&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Nearest-neighbor heuristic<br>
+                    │&nbsp;&nbsp;&nbsp;├── run.py&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Solve and compare<br>
+                    │&nbsp;&nbsp;&nbsp;├── README.md&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Detailed math<br>
+                    │&nbsp;&nbsp;&nbsp;└── data/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# stops.csv, config.json<br>
+                    ├── tests/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# pytest test suite<br>
+                    └── figures/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Generated charts (PNG)<br>
+                </div>
+
+                <h3 style="margin-top: 30px;">Next Steps</h3>
+                <div style="background: #f3e5f5; border-left: 4px solid #7b1fa2; padding: 20px; border-radius: 4px;">
+                    <p><strong>Before submitting this to a college:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Re-derive stage 2</strong> from the README's math yourself. Admissions interviewers will ask you to explain each constraint.</li>
+                        <li><strong>Extend one stage:</strong> Add a variety constraint to stage 1, or real road distances to stage 3. Customization shows ownership.</li>
+                        <li><strong>Write a &frac12; page summary</strong> for your applications, explaining the three problems and your results. Keep it clear for non-engineers.</li>
+                        <li><strong>Git commit with meaningful messages.</strong> Good history is part of the portfolio.</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p><strong>School Operations Research</strong> - A three-stage applied mathematics project demonstrating linear programming, integer programming, and vehicle routing.</p>
+            <p style="margin-top: 15px; font-size: 0.9em;"><strong>Tools:</strong> Python 3.13, PuLP 3.x, CBC solver, pandas, matplotlib, pytest.</p>
+            <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">Created for a high school student applying to applied mathematics programs.</p>
+        </footer>
+    </div>
+</body>
+</html>

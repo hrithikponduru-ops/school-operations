@@ -1,0 +1,12 @@
+stop_id,name,x_km,y_km,students
+0,High School,0,0,0
+1,Maple & 3rd,1.2,2.1,6
+2,Riverside Park,2.8,1.4,5
+3,Oak Hill,3.5,3.2,8
+4,Elm Street,-1.5,2.6,4
+5,Library,-2.9,1.1,7
+6,Pine Court,-3.4,-1.2,5
+7,Station Rd,-1.1,-2.8,6
+8,Birch Lane,1.7,-3.1,4
+9,Cedar Ave,3.3,-1.6,7
+10,Meadow Dr,0.4,4,6

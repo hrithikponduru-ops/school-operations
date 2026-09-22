@@ -1,0 +1,11 @@
+food,cost_per_serving,calories,protein_g,fiber_g,sodium_mg,max_servings
+Whole wheat bread,0.25,80,4,2,150,4
+Peanut butter,0.3,190,8,2,140,3
+Chicken breast,1.2,165,31,0,75,3
+Brown rice,0.2,215,5,3.5,10,4
+Black beans,0.35,110,7,7,200,3
+Broccoli,0.45,55,4,5,60,4
+Apple,0.5,95,0.5,4.5,2,3
+Milk,0.4,120,8,0,120,3
+Cheese pizza,1.1,285,12,2.5,640,3
+Yogurt,0.6,150,9,0,110,2

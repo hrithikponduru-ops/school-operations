@@ -1,6 +1,9 @@
 #README.md
+
+[▶ school operations](https://hrithikponduru-ops.github.io/school-operations/school-operations-research.html)
+
+
 The contents of the `README.md` file are reconstructed sequentially from image_2.png, image_3.png, and image.png:
-[▶ school-operations](https://hrithikponduru-ops.github.io/school-operations/school-operations-research.html)
 
 ```markdown
 # Operations Research for a High School

@@ -1,8 +1,5 @@
-I will now generate the markdown file by extracting the content from the provided images, meticulously transcribing the text, code blocks, and LaTeX math equations.
-
-```markdown:README.md
 # Stage 2: Conflict-Free Course Timetabling (Integer Programming)
-💡
+
 **Question.** Assign 13 courses to 6 periods and 4 rooms so that no teacher or room is double-booked, every class fits its room, and as few students as possible have two classes at the same time.
 
 **Answer.** A greedy spreadsheet-style assignment produces 81 student conflicts. The integer program produces 6, and the solver proves no assignment does better.
@@ -60,7 +57,6 @@ If student $s$ has two courses in period $p$, the left side is 1 and $v_{s,p}$ i
 ```python
 x = {(c, p, r): LpVariable(...) for c in C for p in P for r in R
      if d.courses.loc[c, "enroll"] <= d.rooms[r]}
-
 ```
 
 Fewer variables, and the constraint cannot be violated because there is nothing to violate it with.
@@ -105,7 +101,6 @@ ENG11       Ms. Rivera      20  P5      R101
 APLIT       Mr. Adams       27  P5      R102
 GOV         Ms. Rivera      25  P6      R101
 USHIST      Mr. Kim         21  P6      R201
-
 ```
 
 The solver rediscovered the structure a human scheduler would aim for: put a whole band in one period (all math in P1, all science in P4) so that students who take exactly one course per band never clash. The 6 remaining conflicts belong to students who took a second course from a band that fits in a single period. Ms. Novak teaching both electives forces ART and MUSIC apart, which the solver used to its advantage.
@@ -127,11 +122,4 @@ Two things would tighten it:
 python -m stage2_timetable_ip.make_data  # only if you change courses.csv
 python -m stage2_timetable_ip.run
 python -m pytest tests/test_stage2_timetable.py -v  # 30 s time limit; checks feasibility, not proof
-
-```
-
-```eof
-
-I've assembled the overlapping images of the code editor into a complete markdown file. All mathematical notation, formatting, and sections have been faithfully transcribed and properly formatted.
-
 ```

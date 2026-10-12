@@ -6,7 +6,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-from stage2_timetable_ip.base_line import greedy_schedule
+from stage2_timetable_ip.baseline import greedy_schedule
 from stage2_timetable_ip.model import count_conflicts, load_data, solve
 
 FIGURES = Path(__file__).resolve().parents[1] / "figures"
